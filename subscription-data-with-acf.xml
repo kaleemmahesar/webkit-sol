@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+<channel>
+	<title>Webkit Solutions</title>
+	<link>http://localhost/webkit-sol/wordpress</link>
+	<description></description>
+	<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>http://localhost/webkit-sol/wordpress</wp:base_site_url>
+	<wp:base_blog_url>http://localhost/webkit-sol/wordpress</wp:base_blog_url>
+
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login>admin</wp:author_login>
+		<wp:author_email>admin@example.com</wp:author_email>
+		<wp:author_display_name><![CDATA[admin]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[]]></wp:author_last_name>
+	</wp:author>
+
+	<!-- ACF Field Groups -->
+	<wp:term>
+		<wp:term_id>1</wp:term_id>
+		<wp:term_taxonomy>acf-field-group</wp:term_taxonomy>
+		<wp:term_slug>group_products</wp:term_slug>
+		<wp:term_name><![CDATA[Product Details]]></wp:term_name>
+		<wp:term_description><![CDATA[a:11:{s:2:"ID";s:1:"1";s:4:"key";s:14:"group_products";s:5:"title";s:15:"Product Details";s:6:"fields";a:4:{s:14:"field_thumbnail";a:12:{s:2:"ID";s:1:"2";s:3:"key";s:14:"field_thumbnail";s:4:"label";s:9:"Thumbnail";s:4:"name";s:9:"thumbnail";s:4:"type";s:4:"text";s:7:"instructions";s:45:"Emoji or text representing the product thumbnail";s:8:"required";i:0;s:12:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:8:"maxlength";s:0:"";s:4:"rows";s:0:"";s:8:"new_lines";s:0:"";}s:16:"field_description";a:10:{s:2:"ID";s:1:"3";s:3:"key";s:16:"field_description";s:4:"label";s:11:"Description";s:4:"name";s:11:"description";s:4:"type";s:8:"textarea";s:7:"instructions";s:19:"Product description";s:8:"required";i:0;s:12:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:8:"maxlength";s:0:"";}s:20:"field_starting_price";a:11:{s:2:"ID";s:1:"4";s:3:"key";s:20:"field_starting_price";s:4:"label";s:13:"Starting Price";s:4:"name";s:13:"starting_price";s:4:"type";s:6:"number";s:7:"instructions";s:25:"Starting price for the product";s:8:"required";i:0;s:12:"default_value";s:0:"";s:3:"min";s:0:"";s:3:"max";s:0:"";s:4:"step";s:0:"";}s:14:"field_features";a:11:{s:2:"ID";s:1:"5";s:3:"key";s:14:"field_features";s:4:"label";s:8:"Features";s:4:"name";s:8:"features";s:4:"type";s:8:"repeater";s:7:"instructions";s:22:"List of product features";s:8:"required";i:0;s:5:"clone";s:0:"";s:8:"sub_fields";a:1:{s:18:"field_feature_item";a:11:{s:2:"ID";s:1:"6";s:3:"key";s:18:"field_feature_item";s:4:"label";s:7:"Feature";s:4:"name";s:7:"feature";s:4:"type";s:4:"text";s:7:"instructions";s:0:"";s:8:"required";i:0;s:12:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:8:"maxlength";s:0:"";s:4:"rows";s:0:"";s:8:"new_lines";s:0:"";}}s:11:"row_min";s:0:"";s:11:"row_limit";s:0:"";s:11:"layout";s:5:"table";s:14:"button_label";s:12:"Add Feature";}}}s:8:"location";a:1:{i:0;a:1:{i:0;a:3:{s:5:"param";s:9:"post_type";s:8:"operator";s:2:"==";s:5:"value";s:8:"products";}}}s:10:"menu_order";i:0;s:8:"position";s:6:"normal";s:5:"style";s:7:"default";s:14:"label_placement";s:3:"top";s:19:"instruction_placement";s:5:"label";s:14:"hide_on_screen";s:0:"";s:16:"active";s:1:"1";s:11:"description";s:0:"";}]]></wp:term_description>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>2</wp:term_id>
+		<wp:term_taxonomy>acf-field-group</wp:term_taxonomy>
+		<wp:term_slug>group_plans</wp:term_slug>
+		<wp:term_name><![CDATA[Plan Details]]></wp:term_name>
+		<wp:term_description><![CDATA[a:11:{s:2:"ID";s:1:"7";s:4:"key";s:11:"group_plans";s:5:"title";s:12:"Plan Details";s:6:"fields";a:3:{s:11:"field_price";a:11:{s:2:"ID";s:2:"8";s:3:"key";s:11:"field_price";s:4:"label";s:5:"Price";s:4:"name";s:5:"price";s:4:"type";s:6:"number";s:7:"instructions";s:10:"Plan price";s:8:"required";i:1;s:12:"default_value";s:0:"";s:3:"min";s:0:"";s:3:"max";s:0:"";s:4:"step";s:0:"";}s:12:"field_period";a:13:{s:2:"ID";s:2:"9";s:3:"key";s:12:"field_period";s:4:"label";s:6:"Period";s:4:"name";s:6:"period";s:4:"type";s:6:"select";s:7:"instructions";s:13:"Billing period";s:8:"required";i:1;s:12:"default_value";s:7:"monthly";s:7:"choices";a:3:{s:7:"monthly";s:7:"Monthly";s:9:"quarterly";s:9:"Quarterly";s:6:"yearly";s:6:"Yearly";}s:10:"allow_null";i:0;s:8:"multiple";i:0;s:12:"ui";i:0;s:17:"ajax";i:0;s:12:"return_format";s:5:"value";s:11:"placeholder";s:0:"";}s:18:"field_plan_features";a:11:{s:2:"ID";s:3:"10";s:3:"key";s:18:"field_plan_features";s:4:"label";s:13:"Plan Features";s:4:"name";s:13:"plan_features";s:4:"type";s:8:"repeater";s:7:"instructions";s:21:"List of plan features";s:8:"required";i:0;s:5:"clone";s:0:"";s:8:"sub_fields";a:1:{s:24:"field_plan_feature_item";a:11:{s:2:"ID";s:3:"11";s:3:"key";s:24:"field_plan_feature_item";s:4:"label";s:7:"Feature";s:4:"name";s:7:"feature";s:4:"type";s:4:"text";s:7:"instructions";s:0:"";s:8:"required";i:0;s:12:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:8:"maxlength";s:0:"";s:4:"rows";s:0:"";s:8:"new_lines";s:0:"";}}s:11:"row_min";s:0:"";s:11:"row_limit";s:0:"";s:11:"layout";s:5:"table";s:14:"button_label";s:12:"Add Feature";}}}s:8:"location";a:1:{i:0;a:1:{i:0;a:3:{s:5:"param";s:9:"post_type";s:8:"operator";s:2:"==";s:5:"value";s:5:"plans";}}}s:10:"menu_order";i:0;s:8:"position";s:6:"normal";s:5:"style";s:7:"default";s:14:"label_placement";s:3:"top";s:19:"instruction_placement";s:5:"label";s:14:"hide_on_screen";s:0:"";s:16:"active";s:1:"1";s:11:"description";s:0:"";}]]></wp:term_description>
+	</wp:term>
+
+	<generator>https://wordpress.org/?v=6.5</generator>
+
+	<!-- Products -->
+	<item>
+		<title>Inventory Manager Pro</title>
+		<link>http://localhost/webkit-sol/wordpress/products/inventory-manager-pro/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=products&#038;p=101</guid>
+		<description></description>
+		<content:encoded><![CDATA[Complete inventory tracking and management solution for small businesses]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>101</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>inventory-manager-pro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>products</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[📦]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[field_thumbnail]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>description</wp:meta_key>
+			<wp:meta_value><![CDATA[Complete inventory tracking and management solution for small businesses]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_description</wp:meta_key>
+			<wp:meta_value><![CDATA[field_description]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[20]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_starting_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:3:{i:0;s:21:"Track up to 500 items";i:1;s:15:"Basic reporting";i:2;s:13:"Email support";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Customer Relations Hub</title>
+		<link>http://localhost/webkit-sol/wordpress/products/customer-relations-hub/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=products&#038;p=102</guid>
+		<description></description>
+		<content:encoded><![CDATA[Manage customer interactions, support tickets, and satisfaction metrics]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>102</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>customer-relations-hub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>products</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[👥]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[field_thumbnail]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>description</wp:meta_key>
+			<wp:meta_value><![CDATA[Manage customer interactions, support tickets, and satisfaction metrics]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_description</wp:meta_key>
+			<wp:meta_value><![CDATA[field_description]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[25]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_starting_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:3:{i:0;s:23:"Up to 1000 contacts";i:1;s:15:"Email templates";i:2;s:15:"Basic analytics";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Payroll Plus</title>
+		<link>http://localhost/webkit-sol/wordpress/products/payroll-plus/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=products&#038;p=103</guid>
+		<description></description>
+		<content:encoded><![CDATA[Automated payroll processing with tax compliance and employee self-service]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>103</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>payroll-plus</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>products</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[💰]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_thumbnail</wp:meta_key>
+			<wp:meta_value><![CDATA[field_thumbnail]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>description</wp:meta_key>
+			<wp:meta_value><![CDATA[Automated payroll processing with tax compliance and employee self-service]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_description</wp:meta_key>
+			<wp:meta_value><![CDATA[field_description]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[30]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_starting_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_starting_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:3:{i:0;s:23:"Up to 10 employees";i:1;s:17:"Automated payroll";i:2;s:20:"Tax filing assistance";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Plans for Inventory Manager Pro -->
+	<item>
+		<title>Basic Plan - Inventory Manager Pro</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/basic-inventory-manager-pro/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=201</guid>
+		<description></description>
+		<content:encoded><![CDATA[Basic plan for Inventory Manager Pro]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>201</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>basic-inventory-manager-pro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[20]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[monthly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:4:{i:0;s:21:"Track up to 500 items";i:1;s:15:"Basic reporting";i:2;s:13:"Email support";i:3;s:16:"Mobile app access";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Pro Plan - Inventory Manager Pro</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/pro-inventory-manager-pro/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=202</guid>
+		<description></description>
+		<content:encoded><![CDATA[Pro plan for Inventory Manager Pro]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>202</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>pro-inventory-manager-pro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[55]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[quarterly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:5:{i:0;s:22:"Track up to 2000 items";i:1;s:18:"Advanced reporting";i:2;s:17:"Priority support";i:3;s:16:"Mobile app access";i:4;s:10:"API access";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Enterprise Plan - Inventory Manager Pro</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/enterprise-inventory-manager-pro/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=203</guid>
+		<description></description>
+		<content:encoded><![CDATA[Enterprise plan for Inventory Manager Pro]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>203</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>enterprise-inventory-manager-pro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[180]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[yearly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:6:{i:0;s:15:"Unlimited items";i:1;s:18:"Advanced analytics";i:2;s:20:"24/7 phone support";i:3;s:10:"API access";i:4;s:20:"Custom integrations";i:5;s:25:"Dedicated account manager";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Plans for Customer Relations Hub -->
+	<item>
+		<title>Starter Plan - Customer Relations Hub</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/starter-customer-relations-hub/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=204</guid>
+		<description></description>
+		<content:encoded><![CDATA[Starter plan for Customer Relations Hub]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>204</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>starter-customer-relations-hub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[25]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[monthly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:4:{i:0;s:23:"Up to 1000 contacts";i:1;s:15:"Email templates";i:2;s:15:"Basic analytics";i:3;s:18:"Ticket management";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Business Plan - Customer Relations Hub</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/business-customer-relations-hub/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=205</guid>
+		<description></description>
+		<content:encoded><![CDATA[Business plan for Customer Relations Hub]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>205</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>business-customer-relations-hub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[70]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[quarterly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:5:{i:0;s:23:"Up to 5000 contacts";i:1;s:22:"Custom email templates";i:2;s:18:"Advanced analytics";i:3;s:26:"Priority ticket management";i:4;s:17:"Live chat support";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Corporate Plan - Customer Relations Hub</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/corporate-customer-relations-hub/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=206</guid>
+		<description></description>
+		<content:encoded><![CDATA[Corporate plan for Customer Relations Hub]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>206</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>corporate-customer-relations-hub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[220]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[yearly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:6:{i:0;s:19:"Unlimited contacts";i:1;s:19:"AI-powered insights";i:2;s:17:"Custom workflows";i:3;s:23:"Dedicated support team";i:4;s:10:"API access";i:5;s:13:"SLA guarantee";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Plans for Payroll Plus -->
+	<item>
+		<title>Small Biz Plan - Payroll Plus</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/small-biz-payroll-plus/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=207</guid>
+		<description></description>
+		<content:encoded><![CDATA[Small Business plan for Payroll Plus]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>207</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>small-biz-payroll-plus</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[30]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[monthly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:4:{i:0;s:23:"Up to 10 employees";i:1;s:17:"Automated payroll";i:2;s:21:"Tax filing assistance";i:3;s:15:"Employee portal";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Medium Biz Plan - Payroll Plus</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/medium-biz-payroll-plus/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=208</guid>
+		<description></description>
+		<content:encoded><![CDATA[Medium Business plan for Payroll Plus]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>208</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>medium-biz-payroll-plus</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[85]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[quarterly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:5:{i:0;s:23:"Up to 50 employees";i:1;s:25:"Advanced payroll features";i:2;s:23:"Multi-state tax support";i:3;s:23:"Benefits administration";i:4;s:24:"Time tracking integration";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Enterprise Plan - Payroll Plus</title>
+		<link>http://localhost/webkit-sol/wordpress/plans/enterprise-payroll-plus/</link>
+		<pubDate>Fri, 24 Oct 2025 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://localhost/webkit-sol/wordpress/?post_type=plans&#038;p=209</guid>
+		<description></description>
+		<content:encoded><![CDATA[Enterprise plan for Payroll Plus]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>209</wp:post_id>
+		<wp:post_date>2025-10-24 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2025-10-24 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>enterprise-payroll-plus</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>plans</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>price</wp:meta_key>
+			<wp:meta_value><![CDATA[280]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_price</wp:meta_key>
+			<wp:meta_value><![CDATA[field_price]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>period</wp:meta_key>
+			<wp:meta_value><![CDATA[yearly]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_period</wp:meta_key>
+			<wp:meta_value><![CDATA[field_period]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[a:6:{i:0;s:21:"Unlimited employees";i:1;s:22:"Global payroll support";i:2;s:18:"Advanced analytics";i:3;s:20:"Dedicated specialist";i:4;s:21:"Compliance monitoring";i:5;s:16:"Custom reporting";}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_plan_features</wp:meta_key>
+			<wp:meta_value><![CDATA[field_plan_features]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Test User -->
+	<wp:author>
+		<wp:author_id>2</wp:author_id>
+		<wp:author_login>testuser</wp:author_login>
+		<wp:author_email>test@example.com</wp:author_email>
+		<wp:author_display_name><![CDATA[Test User]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[Test]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[User]]></wp:author_last_name>
+	</wp:author>
+
+</channel>
+</rss>

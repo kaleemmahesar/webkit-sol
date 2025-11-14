@@ -20,13 +20,13 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'webkit-sol' );
+define( 'DB_NAME', 'webkitsolutions' );
 
 /** Database username */
 define( 'DB_USER', 'root' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'Larkana22' );
+define( 'DB_PASSWORD', '' );
 
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );
@@ -85,7 +85,7 @@ $table_prefix = 'wp_';
  *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -100,3 +100,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+define('JWT_AUTH_SECRET_KEY', 'FUU1;yCb:9NM[QRTnGHiCES<yn[4]V$8VrgUL*?DYaJ4x9rd=rNtGGA3fan7IkXg');
+
+define('JWT_AUTH_CORS_ENABLE', true);

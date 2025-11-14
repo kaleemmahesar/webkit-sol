@@ -13,10 +13,11 @@ import {
   broadcastSubscriptionChange,
   listenForSubscriptionUpdates
 } from '../utils/syncUtils';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const AdminDashboardPage = () => {
   const { user, isAdmin } = useSelector(state => state.auth);
-  const { subscriptions } = useSelector(state => state.subscriptions);
+  const { subscriptions, loading } = useSelector(state => state.subscriptions);
   const { users } = useSelector(state => state.auth); // Get users from auth slice
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -290,7 +291,11 @@ const AdminDashboardPage = () => {
           <h2 className="text-xl font-bold text-gray-800">All User Subscriptions</h2>
         </div>
         
-        {filteredSubscriptions.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <LoadingSpinner size="lg" message="Loading subscriptions..." />
+          </div>
+        ) : filteredSubscriptions.length === 0 ? (
           <div className="text-center py-12">
             <span className="text-5xl mb-4 block">📋</span>
             <h3 className="text-xl font-medium text-gray-900 mb-2">No subscriptions found</h3>

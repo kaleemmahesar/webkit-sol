@@ -1,181 +1,62 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addDays, addMonths, addYears } from '../utils/dateUtils';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchProducts, fetchSubscriptions, createSubscription } from '../utils/api';
+import { addMonths, addYears } from '../utils/dateUtils';
+
+export const loadProducts = createAsyncThunk(
+  'subscriptions/loadProducts',
+  async () => {
+    const products = await fetchProducts();
+    
+    // The plans are now embedded in the products, so we don't need to fetch them separately
+    return products.map(product => {
+      // Ensure each product has plans, use startingPrice if no plans are defined
+      let plans = product.plans || [];
+      
+      // If no plans are defined, create a default plan using the starting price
+      if (plans.length === 0 && product.startingPrice > 0) {
+        plans = [{
+          id: `${product.id}-default`,
+          name: 'Standard Plan',
+          price: product.startingPrice,
+          period: 'monthly',
+          features: product.features || []
+        }];
+      }
+      
+      // Calculate starting price from plans if not set
+      let startingPrice = product.startingPrice;
+      if (startingPrice === 0 && plans.length > 0) {
+        startingPrice = Math.min(...plans.map(plan => plan.price));
+      }
+      
+      return { ...product, plans, startingPrice };
+    });
+  }
+);
+
+export const loadUserSubscriptions = createAsyncThunk(
+  'subscriptions/loadUserSubscriptions',
+  async (token) => {
+    const subscriptions = await fetchSubscriptions(token);
+    return subscriptions;
+  }
+);
+
+export const addSubscriptionToAPI = createAsyncThunk(
+  'subscriptions/addSubscriptionToAPI',
+  async ({ subscriptionData, token }) => {
+    const subscription = await createSubscription(subscriptionData, token);
+    return subscription;
+  }
+);
 
 const initialState = {
   selectedProduct: null,
   selectedPlan: null,
-
-  // Mock data for software solutions
-  products: [
-    {
-      id: 1,
-      name: "Inventory Manager Pro",
-      description: "Complete inventory tracking and management solution for small businesses",
-      thumbnail: "📦",
-      startingPrice: 20,
-      plans: [
-        {
-          id: "basic-monthly",
-          name: "Basic",
-          price: 20,
-          period: "monthly",
-          features: [
-            "Track up to 500 items",
-            "Basic reporting",
-            "Email support",
-            "Mobile app access"
-          ]
-        },
-        {
-          id: "pro-quarterly",
-          name: "Pro",
-          price: 55,
-          period: "quarterly",
-          features: [
-            "Track up to 2000 items",
-            "Advanced reporting",
-            "Priority support",
-            "Mobile app access",
-            "API access"
-          ]
-        },
-        {
-          id: "enterprise-yearly",
-          name: "Enterprise",
-          price: 180,
-          period: "yearly",
-          features: [
-            "Unlimited items",
-            "Advanced analytics",
-            "24/7 phone support",
-            "API access",
-            "Custom integrations",
-            "Dedicated account manager"
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Customer Relations Hub",
-      description: "Manage customer interactions, support tickets, and satisfaction metrics",
-      thumbnail: "👥",
-      startingPrice: 25,
-      plans: [
-        {
-          id: "starter-monthly",
-          name: "Starter",
-          price: 25,
-          period: "monthly",
-          features: [
-            "Up to 1000 contacts",
-            "Email templates",
-            "Basic analytics",
-            "Ticket management"
-          ]
-        },
-        {
-          id: "business-quarterly",
-          name: "Business",
-          price: 70,
-          period: "quarterly",
-          features: [
-            "Up to 5000 contacts",
-            "Custom email templates",
-            "Advanced analytics",
-            "Priority ticket management",
-            "Live chat support"
-          ]
-        },
-        {
-          id: "corporate-yearly",
-          name: "Corporate",
-          price: 220,
-          period: "yearly",
-          features: [
-            "Unlimited contacts",
-            "AI-powered insights",
-            "Custom workflows",
-            "Dedicated support team",
-            "API access",
-            "SLA guarantee"
-          ]
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Payroll Plus",
-      description: "Automated payroll processing with tax compliance and employee self-service",
-      thumbnail: "💰",
-      startingPrice: 30,
-      plans: [
-        {
-          id: "small-monthly",
-          name: "Small Biz",
-          price: 30,
-          period: "monthly",
-          features: [
-            "Up to 10 employees",
-            "Automated payroll",
-            "Tax filing assistance",
-            "Employee portal"
-          ]
-        },
-        {
-          id: "medium-quarterly",
-          name: "Medium Biz",
-          price: 85,
-          period: "quarterly",
-          features: [
-            "Up to 50 employees",
-            "Advanced payroll features",
-            "Multi-state tax support",
-            "Benefits administration",
-            "Time tracking integration"
-          ]
-        },
-        {
-          id: "large-yearly",
-          name: "Enterprise",
-          price: 280,
-          period: "yearly",
-          features: [
-            "Unlimited employees",
-            "Global payroll support",
-            "Advanced analytics",
-            "Dedicated specialist",
-            "Compliance monitoring",
-            "Custom reporting"
-          ]
-        }
-      ]
-    }
-  ],
-  subscriptions: [
-    // Pre-populate with some mock subscriptions for testing
-    {
-      id: 1,
-      userId: 1,
-      product: "Inventory Manager Pro",
-      plan: {
-        id: "pro-quarterly",
-        name: "Pro",
-        price: 55,
-        period: "quarterly",
-        features: [
-          "Track up to 2000 items",
-          "Advanced reporting",
-          "Priority support",
-          "Mobile app access",
-          "API access"
-        ]
-      },
-      startDate: "2025-10-01",
-      nextBillingDate: "2025-12-31",
-      status: "Active"
-    }
-  ]
+  products: [],
+  subscriptions: [],
+  loading: false,
+  error: null
 };
 
 export const subscriptionSlice = createSlice({
@@ -229,6 +110,37 @@ export const subscriptionSlice = createSlice({
         subscription.nextBillingDate = calculateNextBillingDate(subscription.plan.period);
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loadProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(loadProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(loadUserSubscriptions.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loadUserSubscriptions.fulfilled, (state, action) => {
+        state.loading = false;
+        state.subscriptions = action.payload;
+      })
+      .addCase(loadUserSubscriptions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(addSubscriptionToAPI.fulfilled, (state, action) => {
+        // Handle successful subscription creation
+        // The subscription is already added locally in the addSubscription reducer
+      });
   },
 });
 

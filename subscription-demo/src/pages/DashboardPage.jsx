@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { checkSubscriptions, pauseSubscription, activateSubscription } from '../store/subscriptionSlice';
-import { addBillingRecord } from '../store/billingSlice';
+import { checkSubscriptions } from '../store/subscriptionSlice';
 import { toast } from 'react-toastify';
+import LoadingSpinner from '../components/LoadingSpinner';
 import UpgradeModal from '../components/UpgradeModal';
 
 const DashboardPage = () => {
-  const { user } = useSelector(state => state.auth);
-  const { subscriptions, products } = useSelector(state => state.subscriptions);
-  const { billingHistory } = useSelector(state => state.billing);
+  const { subscriptions, products, loading } = useSelector(state => state.subscriptions);
+  const { user, isLoggedIn, token } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showBillingHistory, setShowBillingHistory] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
 
-  // Filter subscriptions for current user
-  const userSubscriptions = subscriptions.filter(sub => sub.userId === user?.id);
-  
-  // Filter billing history for current user
-  const userBillingHistory = billingHistory.filter(record => record.userId === user?.id);
+  // Wait for user data to be available before filtering subscriptions
+  const userSubscriptions = isLoggedIn && user?.id && user.id !== 'undefined' && user.id !== 'null' && user.id.trim() !== '' ? 
+    subscriptions.filter(sub => {
+      const subscriptionUserId = String(sub.userId || sub.user_id || '');
+      const currentUserId = String(user.id);
+      
+      // Ensure proper comparison by trimming whitespace and handling different formats
+      return subscriptionUserId.trim() === currentUserId.trim();
+    }) : [];
 
   // Check subscriptions on component mount
   useEffect(() => {
@@ -35,7 +38,7 @@ const DashboardPage = () => {
         const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
         
         if (daysDiff <= 10 && daysDiff >= 0) {
-          toast.warn(`Your ${subscription.product} subscription expires in ${daysDiff} days!`, {
+          toast.warn(`Your ${subscription.product || subscription.plan?.name || 'subscription'} subscription expires in ${daysDiff} days!`, {
             autoClose: 5000,
             hideProgressBar: false,
           });
@@ -78,6 +81,15 @@ const DashboardPage = () => {
   const toggleBillingHistory = () => {
     setShowBillingHistory(!showBillingHistory);
   };
+
+  // Show loading state while waiting for user data
+  if (!isLoggedIn || !user) {
+    return (
+      <div className="text-center py-12">
+        <LoadingSpinner size="lg" message="Loading dashboard..." />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -129,7 +141,7 @@ const DashboardPage = () => {
             <div>
               <p className="text-gray-500 text-sm">Total Spent</p>
               <p className="text-2xl font-bold">
-                ${userSubscriptions.reduce((sum, sub) => sum + sub.plan.price, 0)}
+                ${userSubscriptions.reduce((sum, sub) => sum + (sub.plan?.price || 0), 0).toFixed(2)}
               </p>
             </div>
           </div>
@@ -158,7 +170,11 @@ const DashboardPage = () => {
           <h2 className="text-xl font-bold text-gray-800">Your Subscriptions</h2>
         </div>
         
-        {userSubscriptions.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <LoadingSpinner size="lg" message="Loading your subscriptions..." />
+          </div>
+        ) : userSubscriptions.length === 0 ? (
           <div className="text-center py-12">
             <span className="text-5xl mb-4 block">📭</span>
             <h3 className="text-xl font-medium text-gray-900 mb-2">No subscriptions yet</h3>
@@ -213,16 +229,16 @@ const DashboardPage = () => {
                             <span className="text-[#071846]">📦</span>
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">{subscription.product}</div>
+                            <div className="text-sm font-medium text-gray-900">{subscription.product || subscription.plan?.name || 'Unknown Product'}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{subscription.plan.name}</div>
-                        <div className="text-sm text-gray-500">{formatPeriod(subscription.plan.period)}</div>
+                        <div className="text-sm text-gray-900">{subscription.plan?.name || 'Unknown Plan'}</div>
+                        <div className="text-sm text-gray-500">{subscription.plan?.period ? formatPeriod(subscription.plan.period) : ''}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(subscription.startDate).toLocaleDateString()}
+                        {subscription.startDate ? new Date(subscription.startDate).toLocaleDateString() : ''}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {nextBilling.toLocaleDateString()}
@@ -274,69 +290,14 @@ const DashboardPage = () => {
         
         {showBillingHistory ? (
           <div className="overflow-x-auto">
-            {userBillingHistory.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-gray-500">No billing history found</p>
-              </div>
-            ) : (
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Product
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Plan
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Amount
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Invoice
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {userBillingHistory.map((record) => (
-                    <tr key={record.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(record.date).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {record.product}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {record.plan}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${record.amount}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {record.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-[#071846]">
-                        <a href={record.invoiceUrl} className="hover:text-[#0a2263]">
-                          Download
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+            <div className="text-center py-8">
+              <p className="text-gray-500">No billing history found</p>
+            </div>
           </div>
         ) : (
           <div className="px-6 py-4">
             <p className="text-gray-600">
-              You have {userBillingHistory.length} billing records. 
+              You have 0 billing records. 
               <button 
                 onClick={toggleBillingHistory}
                 className="text-[#071846] hover:text-[#0a2263] ml-2 font-medium"

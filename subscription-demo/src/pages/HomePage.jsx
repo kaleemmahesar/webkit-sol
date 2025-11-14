@@ -10,9 +10,10 @@ import {
   ONBOARDING_STEPS
 } from '../utils/onboarding';
 import TeamProfiles from '../components/TeamProfiles';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const HomePage = () => {
-  const { products } = useSelector(state => state.subscriptions);
+  const { products, loading } = useSelector(state => state.subscriptions);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -70,49 +71,54 @@ const HomePage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div 
-              key={product.id} 
-              className="bg-white rounded-xl shadow-lg overflow-hidden card-hover border border-gray-100 transition-all duration-300 hover:shadow-xl"
-            >
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <span className="text-4xl mr-4">{product.thumbnail}</span>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <LoadingSpinner size="lg" message="Loading our solutions..." />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => (
+              <div 
+                key={product.id} 
+                className="bg-white rounded-xl shadow-lg overflow-hidden card-hover border border-gray-100 transition-all duration-300 hover:shadow-xl"
+              >
+                <div className="p-6">
+                  <div className="flex items-center mb-4">
+                    <span className="text-4xl mr-4"><img className='h-14 w-14 object-cover rounded-full mr-4' src={product.thumbnail} alt={product.name} /></span>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
+                    </div>
                   </div>
-                </div>
-                
-                <p className="text-gray-600 mb-6">{product.description}</p>
-                
-                
-                {/* Pricing Information */}
-                <div className="mb-6 bg-gray-50 p-4 rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Starting at</span>
-                    <span className="text-2xl font-bold text-[#071846]">${product.startingPrice}<span className="text-sm font-normal text-gray-500">/month</span></span>
+                  
+                  <div className="text-gray-600 mb-6" dangerouslySetInnerHTML={{ __html: product.description }} />
+                  
+                  {/* Pricing Information */}
+                  <div className="mb-6 bg-gray-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Starting at</span>
+                      <span className="text-2xl font-bold text-[#071846]">${product.startingPrice}<span className="text-sm font-normal text-gray-500">/month</span></span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex space-x-3">
-                  <button
-                    onClick={() => handleViewDetails(product)}
-                    className="flex-1 bg-gray-100 text-gray-800 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-medium"
-                  >
-                    Details
-                  </button>
-                  <button
-                    onClick={() => handleViewPricing(product)}
-                    className="flex-1 bg-[#071846] text-white py-2 rounded-lg hover:bg-[#0a2263] transition duration-300 font-medium"
-                  >
-                    View Plans
-                  </button>
+                  
+                  <div className="flex space-x-3">
+                    <button
+                      onClick={() => handleViewDetails(product)}
+                      className="flex-1 bg-gray-100 text-gray-800 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-medium"
+                    >
+                      Details
+                    </button>
+                    <button
+                      onClick={() => handleViewPricing(product)}
+                      className="flex-1 bg-[#071846] text-white py-2 rounded-lg hover:bg-[#0a2263] transition duration-300 font-medium"
+                    >
+                      View Plans
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Features/Why Choose Us Section */}
@@ -206,38 +212,15 @@ const HomePage = () => {
                 <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 flex items-center justify-center text-gray-500 mb-4">
                   {selectedProduct.name} Solution Preview
                 </div>
-                <p className="text-gray-600">{selectedProduct.description}</p>
+                <div className="text-gray-600" dangerouslySetInnerHTML={{ __html: selectedProduct.description }} />
               </div>
               
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Features</h4>
-                <ul className="space-y-2">
-                  {selectedProduct.plans && selectedProduct.plans.length > 0 && 
-                    selectedProduct.plans[0].features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-green-500 mr-2">✓</span>
-                        <span className="text-gray-600">{feature}</span>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-              
-              <div className="flex justify-end space-x-3">
+              <div className="flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  className="bg-[#071846] text-white py-2 px-6 rounded-lg hover:bg-[#0a2263]"
                 >
                   Close
-                </button>
-                <button
-                  onClick={() => {
-                    handleViewPricing(selectedProduct);
-                    closeModal();
-                  }}
-                  className="px-4 py-2 bg-[#071846] text-white rounded-lg hover:bg-[#0a2263]"
-                >
-                  View Plans & Pricing
                 </button>
               </div>
             </div>

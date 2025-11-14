@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { login, signup } from '../store/authSlice';
+import { loginAsync, registerAsync } from '../store/authSlice';
+import { loadUserSubscriptions } from '../store/subscriptionSlice';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -12,17 +13,19 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn, isAdmin } = useSelector(state => state.auth);
+  const { isLoggedIn, isAdmin, loading, error, user, token } = useSelector(state => state.auth);
 
   // Get the return URL from location state or default
   const from = location.state?.from?.pathname || (isAdmin ? "/admin" : "/dashboard");
 
   // Handle redirect when already logged in
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && token) {
+      // Load user subscriptions after login
+      dispatch(loadUserSubscriptions(token));
       navigate(from, { replace: true });
     }
-  }, [isLoggedIn, isAdmin, from, navigate]);
+  }, [isLoggedIn, isAdmin, from, navigate, token, dispatch]);
 
   // Validation schemas
   const loginSchema = Yup.object().shape({
@@ -41,12 +44,12 @@ const LoginPage = () => {
 
   const handleLogin = async (values, { setSubmitting, setFieldError }) => {
     try {
-      await dispatch(login(values)).unwrap();
+      await dispatch(loginAsync(values)).unwrap();
       toast.success('Logged in successfully!', {
         autoClose: 3000,
         hideProgressBar: true,
       });
-      // Navigation will be handled by the useEffect above
+      // Navigation and subscription loading will be handled by the useEffect above
     } catch (error) {
       if (error.message === 'Account deactivated. Please renew your account or contact admin.') {
         setFieldError('email', 'Account deactivated. Please renew your account or contact admin.');
@@ -68,12 +71,12 @@ const LoginPage = () => {
 
   const handleSignup = async (values, { setSubmitting, setFieldError }) => {
     try {
-      await dispatch(signup(values)).unwrap();
+      await dispatch(registerAsync({ name: values.name, email: values.email, password: values.password })).unwrap();
       toast.success('Account created successfully!', {
         autoClose: 3000,
         hideProgressBar: true,
       });
-      // Navigation will be handled by the useEffect above
+      // Navigation and subscription loading will be handled by the useEffect above
     } catch (error) {
       if (error.message === 'User already exists') {
         setFieldError('email', 'User already exists with this email');
@@ -194,16 +197,21 @@ const LoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || loading}
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#071846] hover:bg-[#0a2263] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#071846] disabled:opacity-50"
                 >
-                  {isSubmitting ? (
+                  {isSubmitting || loading ? (
                     <>
                       <LoadingSpinner size="sm" />
                       <span className="ml-2">Signing in...</span>
                     </>
                   ) : 'Sign in'}
                 </button>
+                {error && (
+                  <div className="text-red-500 text-sm mt-2 text-center">
+                    {error}
+                  </div>
+                )}
               </div>
             </Form>
           )}
@@ -275,10 +283,10 @@ const LoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || loading}
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#071846] hover:bg-[#0a2263] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#071846] disabled:opacity-50"
                 >
-                  {isSubmitting ? (
+                  {isSubmitting || loading ? (
                     <>
                       <LoadingSpinner size="sm" />
                       <span className="ml-2">Creating account...</span>
@@ -290,18 +298,6 @@ const LoginPage = () => {
           )}
         </Formik>
       )}
-
-      <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="font-medium text-[#071846] hover:text-[#0a2263]"
-          >
-            {isLogin ? 'Sign up' : 'Sign in'}
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

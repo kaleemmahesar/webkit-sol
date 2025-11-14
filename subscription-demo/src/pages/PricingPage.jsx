@@ -9,10 +9,11 @@ import {
   setCurrentOnboardingStep,
   ONBOARDING_STEPS
 } from '../utils/onboarding';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const PricingPage = () => {
   const { productId } = useParams();
-  const { products, selectedProduct } = useSelector(state => state.subscriptions);
+  const { products, selectedProduct, loading } = useSelector(state => state.subscriptions);
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,6 +29,14 @@ const PricingPage = () => {
       setCurrentOnboardingStep(ONBOARDING_STEPS.CHECKOUT);
     }
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-12">
+        <LoadingSpinner size="lg" message="Loading product details..." />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -95,7 +104,7 @@ const PricingPage = () => {
       {/* Product Header */}
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">{product.description}</p>
+        <div className="text-gray-600 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: product.description }} />
       </div>
 
       {/* Pricing Plans */}

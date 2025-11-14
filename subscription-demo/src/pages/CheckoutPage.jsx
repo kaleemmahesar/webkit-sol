@@ -3,15 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { addSubscription } from '../store/subscriptionSlice';
-import { addBillingRecord } from '../store/billingSlice';
+import { addSubscription, addSubscriptionToAPI } from '../store/subscriptionSlice';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const CheckoutPage = () => {
   const { selectedProduct, selectedPlan } = useSelector(state => state.subscriptions);
   const { subscriptions } = useSelector(state => state.subscriptions);
-  const { user } = useSelector(state => state.auth);
+  const { user, token } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [couponCode, setCouponCode] = useState('');
@@ -72,31 +71,31 @@ const CheckoutPage = () => {
       // For our mock system, we'll just simulate a successful payment
       
       // Add subscription to store
-      dispatch(addSubscription({
+      const subscriptionData = {
         userId: user.id,
         product: selectedProduct.name,
         plan: selectedPlan
-      }));
-      
-      // Get the ID of the newly added subscription
-      const newSubscriptionId = subscriptions.length > 0 
-        ? subscriptions[subscriptions.length - 1].id + 1 
-        : 1;
-      
-      // Add to billing history
-      const billingRecord = {
-        id: Date.now(),
-        userId: user.id,
-        subscriptionId: newSubscriptionId,
-        product: selectedProduct.name,
-        plan: selectedPlan.name,
-        amount: selectedPlan.price * (1 - discount / 100),
-        date: new Date().toISOString().split('T')[0],
-        status: "Paid",
-        invoiceUrl: "#"
       };
       
-      dispatch(addBillingRecord(billingRecord));
+      dispatch(addSubscription(subscriptionData));
+      
+      // Also add to WordPress API
+      if (token) {
+        // Format dates properly
+        const today = new Date();
+        const startDate = today.toISOString().split('T')[0];
+        const nextBillingDate = calculateNextBillingDate(selectedPlan.period);
+        
+        const apiSubscriptionData = {
+          userId: user.id,
+          product: selectedProduct.name,
+          planId: parseInt(selectedPlan.id, 10) || selectedPlan.id, // Try to convert to integer, fallback to original if NaN
+          startDate: startDate,
+          nextBillingDate: nextBillingDate
+        };
+        
+        dispatch(addSubscriptionToAPI({ subscriptionData: apiSubscriptionData, token }));
+      }
       
       toast.success('Payment successful! Subscription activated.', {
         autoClose: 3000,
@@ -113,6 +112,30 @@ const CheckoutPage = () => {
     }
   };
 
+  // Helper function to calculate next billing date
+  const calculateNextBillingDate = (period) => {
+    const today = new Date();
+    
+    switch (period) {
+      case "monthly":
+        const monthly = new Date(today);
+        monthly.setMonth(monthly.getMonth() + 1);
+        return monthly.toISOString().split('T')[0];
+      case "quarterly":
+        const quarterly = new Date(today);
+        quarterly.setMonth(quarterly.getMonth() + 3);
+        return quarterly.toISOString().split('T')[0];
+      case "yearly":
+        const yearly = new Date(today);
+        yearly.setFullYear(yearly.getFullYear() + 1);
+        return yearly.toISOString().split('T')[0];
+      default:
+        const defaultDate = new Date(today);
+        defaultDate.setMonth(defaultDate.getMonth() + 1);
+        return defaultDate.toISOString().split('T')[0];
+    }
+  };
+
   // Format period for display
   const formatPeriod = (period) => {
     switch (period) {
@@ -123,8 +146,8 @@ const CheckoutPage = () => {
     }
   };
 
-  // Calculate amounts
-  const subtotal = selectedPlan.price;
+  // Calculate amounts - ensure they are numbers
+  const subtotal = parseFloat(selectedPlan.price) || 0;
   const discountAmount = subtotal * (discount / 100);
   const totalAmount = subtotal - discountAmount;
 
@@ -181,32 +204,40 @@ const CheckoutPage = () => {
             </div>
             
             <div className="flex justify-between">
-              <span className="text-gray-600">Billing Period:</span>
-              <span className="font-medium capitalize">{selectedPlan.period}</span>
+              <span className="text-gray-600">Billing Cycle:</span>
+              <span className="font-medium capitalize">{formatPeriod(selectedPlan.period)}</span>
             </div>
             
             <div className="flex justify-between">
               <span className="text-gray-600">Features:</span>
-              <span className="font-medium text-green-600">All included</span>
+              <div className="text-right">
+                {selectedPlan.features && selectedPlan.features.length > 0 ? (
+                  selectedPlan.features.map((feature, index) => (
+                    <div key={index} className="text-gray-600">• {feature}</div>
+                  ))
+                ) : (
+                  <div className="text-gray-600">Basic features included</div>
+                )}
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-200 pt-4 mt-4">
+            <div className="flex justify-between">
+              <span>Subtotal:</span>
+              <span>${subtotal.toFixed(2)}</span>
             </div>
             
-            <div className="border-t border-gray-200 pt-4 mt-4">
-              <div className="flex justify-between">
-                <span>Subtotal:</span>
-                <span>${subtotal.toFixed(2)}</span>
+            {discount > 0 && (
+              <div className="flex justify-between text-green-600">
+                <span>Discount ({discount}%):</span>
+                <span>-${discountAmount.toFixed(2)}</span>
               </div>
-              
-              {discount > 0 && (
-                <div className="flex justify-between text-green-600">
-                  <span>Discount ({discount}%):</span>
-                  <span>-${discountAmount.toFixed(2)}</span>
-                </div>
-              )}
-              
-              <div className="flex justify-between text-lg font-bold mt-2">
-                <span>Total:</span>
-                <span>${totalAmount.toFixed(2)} {formatPeriod(selectedPlan.period)}</span>
-              </div>
+            )}
+            
+            <div className="flex justify-between text-lg font-bold mt-2">
+              <span>Total:</span>
+              <span>${totalAmount.toFixed(2)} {formatPeriod(selectedPlan.period)}</span>
             </div>
           </div>
           
